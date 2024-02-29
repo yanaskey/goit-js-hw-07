@@ -2,7 +2,7 @@ const boxControls = document.querySelector('#controls');
 const boxSquares = document.querySelector('#boxes');
 const createBtn = document.querySelector('button[data-create]');
 const destroyBtn = document.querySelector('button[data-destroy]');
-const inputDigit = document.querySelector('input[type="number"]');
+const inputDigit = document.querySelector('input');
 
 createBtn.addEventListener('click', onCreateBtnClick);
 destroyBtn.addEventListener('click', onDestroyBtnClick);
@@ -10,18 +10,18 @@ destroyBtn.addEventListener('click', onDestroyBtnClick);
 createBtn.classList.add('create');
 destroyBtn.classList.add('destroy');
 
-function onCreateBtnClick(event) {
+function onCreateBtnClick() {
   onDestroyBtnClick();
-  const inputNumber = 7; //// мав бути inputDigit.value , але він у мене чомусь не працює усюди по коду
-  if (inputNumber >= 1 && inputNumber <= 100) {
-    const boxesMarkup = createBoxes(inputNumber).join('');
+  const amount = parseInt(inputDigit.value);
+  if (amount >= 1 && amount <= 100) {
+    const boxesMarkup = createBoxes(amount).join('');
+    inputDigit.value = '';
     return boxSquares.insertAdjacentHTML('afterbegin', boxesMarkup);
   }
 }
 
-function onDestroyBtnClick(event) {
+function onDestroyBtnClick() {
   boxSquares.innerHTML = '';
-  inputDigit.value = ''; //тут теж не працює
 }
 
 function createBoxes(amount) {
